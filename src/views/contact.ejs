@@ -1,0 +1,68 @@
+<section class="container page-section">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Support</p>
+      <h1>Contact & Enquiry Management</h1>
+    </div>
+  </div>
+
+  <div class="contact-grid">
+    <form class="panel form-stack" action="/contact" method="POST">
+      <h2>Submit Enquiry</h2>
+      <label>Name
+        <input type="text" name="name" value="<%= currentUser ? currentUser.name : '' %>" required>
+      </label>
+      <label>Email
+        <input type="email" name="email" value="<%= currentUser ? currentUser.email : '' %>" required>
+      </label>
+      <label>Subject
+        <input type="text" name="subject" required>
+      </label>
+      <label>Message
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+      <button class="button full" type="submit">Send Enquiry</button>
+    </form>
+
+    <% if (currentUser && currentUser.role === 'admin') { %>
+      <section>
+        <h2>Admin Enquiry Queue</h2>
+        <% if (!enquiries.length) { %>
+          <div class="empty-state">No enquiries have been submitted.</div>
+        <% } %>
+        <div class="enquiry-list">
+          <% enquiries.forEach(enquiry => { %>
+            <article class="enquiry-card">
+              <div>
+                <p class="eyebrow"><%= enquiry.status %></p>
+                <h3><%= enquiry.subject %></h3>
+                <p><%= enquiry.message %></p>
+                <small><%= enquiry.name %> · <%= enquiry.email %></small>
+              </div>
+              <div class="enquiry-actions">
+                <form action="/contact/<%= enquiry._id %>/status?_method=PATCH" method="POST">
+                  <select name="status">
+                    <option value="new" <%= enquiry.status === 'new' ? 'selected' : '' %>>New</option>
+                    <option value="in progress" <%= enquiry.status === 'in progress' ? 'selected' : '' %>>In progress</option>
+                    <option value="closed" <%= enquiry.status === 'closed' ? 'selected' : '' %>>Closed</option>
+                  </select>
+                  <button class="button small" type="submit">Update</button>
+                </form>
+                <form action="/contact/<%= enquiry._id %>?_method=DELETE" method="POST">
+                  <button class="button small danger" type="submit">Delete</button>
+                </form>
+              </div>
+            </article>
+          <% }) %>
+        </div>
+      </section>
+    <% } else { %>
+      <aside class="panel contact-info">
+        <h2>Advanced Events Office</h2>
+        <p>Our coordination team responds to event, ticketing and partnership enquiries from one secure queue.</p>
+        <span>support@advancedevents.local</span>
+        <span>Johannesburg, South Africa</span>
+      </aside>
+    <% } %>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+{
+  "name": "smart-event-ticketing-platform",
+  "version": "1.0.0",
+  "description": "Smart Event Management and Ticketing Platform built with Node.js, Express, EJS, MongoDB and Mongoose.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node seed.js"
+  },
+  "keywords": [
+    "events",
+    "ticketing",
+    "express",
+    "ejs",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "Advanced Events Development Team",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

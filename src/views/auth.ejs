@@ -1,0 +1,40 @@
+<section class="container page-section">
+  <div class="auth-grid">
+    <form class="panel form-stack" action="/auth/login" method="POST">
+      <div>
+        <p class="eyebrow">Welcome Back</p>
+        <h1>Login</h1>
+      </div>
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+      <label>Password
+        <input type="password" name="password" required>
+      </label>
+      <button class="button full" type="submit">Login</button>
+    </form>
+
+    <form class="panel form-stack" action="/auth/register" method="POST">
+      <div>
+        <p class="eyebrow">New Account</p>
+        <h1>Register</h1>
+      </div>
+      <label>Full name
+        <input type="text" name="name" required>
+      </label>
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+      <label>Password
+        <input type="password" name="password" minlength="6" required>
+      </label>
+      <label>Confirm password
+        <input type="password" name="confirmPassword" minlength="6" required>
+      </label>
+      <label>Admin registration code
+        <input type="text" name="roleCode" placeholder="Leave blank for standard user">
+      </label>
+      <button class="button full" type="submit">Create Account</button>
+    </form>
+  </div>
+</section>

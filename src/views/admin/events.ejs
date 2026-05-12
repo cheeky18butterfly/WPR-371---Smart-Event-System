@@ -1,0 +1,76 @@
+<section class="container page-section">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Admin Only</p>
+      <h1>Event Management</h1>
+    </div>
+  </div>
+
+  <form class="panel form-grid" action="<%= editingEvent ? `/admin/events/${editingEvent._id}?_method=PUT` : '/admin/events' %>" method="POST">
+    <h2><%= editingEvent ? 'Update Event' : 'Create Event' %></h2>
+    <label>Title
+      <input type="text" name="title" value="<%= editingEvent ? editingEvent.title : '' %>" required>
+    </label>
+    <label>Category
+      <select name="category" required>
+        <% categories.forEach(category => { %>
+          <option value="<%= category %>" <%= editingEvent && editingEvent.category === category ? 'selected' : '' %>><%= category %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Venue
+      <input type="text" name="venue" value="<%= editingEvent ? editingEvent.venue : '' %>" required>
+    </label>
+    <label>Date and time
+      <input type="datetime-local" name="date" value="<%= editingEvent ? editingEvent.date.toISOString().slice(0, 16) : '' %>" required>
+    </label>
+    <label>Price
+      <input type="number" name="price" min="0" step="0.01" value="<%= editingEvent ? editingEvent.price : '' %>" required>
+    </label>
+    <label>Capacity
+      <input type="number" name="capacity" min="1" value="<%= editingEvent ? editingEvent.capacity : '' %>" required>
+    </label>
+    <label class="span-2">Image URL
+      <input type="url" name="imageUrl" value="<%= editingEvent ? editingEvent.imageUrl : '/images/event-default.svg' %>">
+    </label>
+    <label class="span-2">Description
+      <textarea name="description" rows="4" required><%= editingEvent ? editingEvent.description : '' %></textarea>
+    </label>
+    <div class="form-actions span-2">
+      <button class="button" type="submit"><%= editingEvent ? 'Save Changes' : 'Create Event' %></button>
+      <% if (editingEvent) { %>
+        <a class="button secondary" href="/admin/events">Cancel Edit</a>
+      <% } %>
+    </div>
+  </form>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Date</th>
+          <th>Capacity</th>
+          <th>Booked</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% events.forEach(event => { %>
+          <tr>
+            <td><strong><%= event.title %></strong><br><span><%= event.category %></span></td>
+            <td><%= event.date.toLocaleDateString('en-ZA') %></td>
+            <td><%= event.capacity %></td>
+            <td><%= event.ticketsBooked %></td>
+            <td class="table-actions">
+              <a class="button small secondary" href="/admin/events/<%= event._id %>/edit">Edit</a>
+              <form action="/admin/events/<%= event._id %>?_method=DELETE" method="POST">
+                <button class="button small danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

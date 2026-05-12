@@ -1,0 +1,76 @@
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Smart Event Management</p>
+      <h1>Book conferences, workshops, festivals and private events with confidence.</h1>
+      <p class="hero-copy">Discover live events, check availability, and manage tickets through one secure platform.</p>
+      <div class="hero-actions">
+        <a class="button" href="#events">Browse Events</a>
+        <% if (currentUser && currentUser.role === 'admin') { %>
+          <a class="button secondary" href="/admin/events">Create Event</a>
+        <% } %>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <span class="metric"><strong><%= events.length %></strong> listed events</span>
+      <span class="metric"><strong><%= events.filter(event => event.availableTickets > 0).length %></strong> open for booking</span>
+      <span class="metric"><strong><%= categories.length %></strong> categories</span>
+    </div>
+  </div>
+</section>
+
+<section class="container page-section" id="events">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Event Discovery</p>
+      <h2>Available Events</h2>
+    </div>
+  </div>
+
+  <form class="filter-bar" method="GET" action="/">
+    <input type="search" name="q" placeholder="Search by title, venue or keyword" value="<%= filters.q || '' %>">
+    <select name="category">
+      <option value="">All categories</option>
+      <% categories.forEach(category => { %>
+        <option value="<%= category %>" <%= filters.category === category ? 'selected' : '' %>><%= category %></option>
+      <% }) %>
+    </select>
+    <select name="date">
+      <option value="">Any date</option>
+      <option value="upcoming" <%= filters.date === 'upcoming' ? 'selected' : '' %>>Upcoming</option>
+      <option value="past" <%= filters.date === 'past' ? 'selected' : '' %>>Past</option>
+    </select>
+    <select name="availability">
+      <option value="">Any availability</option>
+      <option value="available" <%= filters.availability === 'available' ? 'selected' : '' %>>Tickets available</option>
+      <option value="sold-out" <%= filters.availability === 'sold-out' ? 'selected' : '' %>>Sold out</option>
+    </select>
+    <button class="button" type="submit">Filter</button>
+  </form>
+
+  <% if (!events.length) { %>
+    <div class="empty-state">No events match your filters.</div>
+  <% } %>
+
+  <div class="event-grid">
+    <% events.forEach(event => { %>
+      <article class="event-card">
+        <img src="<%= event.imageUrl %>" alt="">
+        <div class="event-card-body">
+          <div class="card-meta">
+            <span><%= event.category %></span>
+            <span><%= event.availableTickets %> left</span>
+          </div>
+          <h3><%= event.title %></h3>
+          <p><%= event.description.substring(0, 120) %><%= event.description.length > 120 ? '...' : '' %></p>
+          <div class="event-details">
+            <span><%= event.date.toLocaleDateString('en-ZA', { day: '2-digit', month: 'short', year: 'numeric' }) %></span>
+            <span><%= event.venue %></span>
+            <span>R<%= event.price.toFixed(2) %></span>
+          </div>
+          <a class="button full" href="/events/<%= event._id %>">View Details</a>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>

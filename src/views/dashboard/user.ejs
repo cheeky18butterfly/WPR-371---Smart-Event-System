@@ -1,0 +1,36 @@
+<section class="container page-section">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Booking & Dashboard</p>
+      <h1>My Booking History</h1>
+    </div>
+    <a class="button" href="/">Find Events</a>
+  </div>
+
+  <% if (!bookings.length) { %>
+    <div class="empty-state">You have not booked any tickets yet.</div>
+  <% } %>
+
+  <div class="booking-list">
+    <% bookings.forEach(booking => { %>
+      <article class="booking-card">
+        <div>
+          <p class="eyebrow"><%= booking.status %></p>
+          <h2><%= booking.event ? booking.event.title : 'Deleted event' %></h2>
+          <% if (booking.event) { %>
+            <p><%= booking.event.date.toLocaleString('en-ZA', { dateStyle: 'medium', timeStyle: 'short' }) %> at <%= booking.event.venue %></p>
+          <% } %>
+        </div>
+        <div class="booking-summary">
+          <span><strong><%= booking.quantity %></strong> ticket(s)</span>
+          <span><strong>R<%= booking.totalPrice.toFixed(2) %></strong> total</span>
+          <% if (booking.status === 'confirmed') { %>
+            <form action="/bookings/<%= booking._id %>/cancel?_method=PATCH" method="POST">
+              <button class="button small danger" type="submit">Cancel</button>
+            </form>
+          <% } %>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>

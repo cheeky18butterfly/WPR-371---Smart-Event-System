@@ -1,0 +1,78 @@
+<section class="container page-section">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Admin Analytics</p>
+      <h1>Business Dashboard</h1>
+    </div>
+    <a class="button" href="/admin/events">Manage Events</a>
+  </div>
+
+  <div class="analytics-grid">
+    <div class="stat-card">
+      <span>Total Tickets</span>
+      <strong><%= stats.totalBookings %></strong>
+    </div>
+    <div class="stat-card">
+      <span>Revenue</span>
+      <strong>R<%= stats.revenue.toFixed(2) %></strong>
+    </div>
+    <div class="stat-card">
+      <span>Capacity Usage</span>
+      <strong><%= stats.capacityUsage %>%</strong>
+    </div>
+    <div class="stat-card">
+      <span>Open Enquiries</span>
+      <strong><%= openEnquiries %></strong>
+    </div>
+  </div>
+
+  <div class="split-layout">
+    <section>
+      <h2>Popular Events</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Booked</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% events.forEach(event => { %>
+              <tr>
+                <td><%= event.title %></td>
+                <td><%= event.ticketsBooked %> / <%= event.capacity %></td>
+                <td><%= event.capacity ? Math.round((event.ticketsBooked / event.capacity) * 100) : 0 %>%</td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Recent Bookings</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Event</th>
+              <th>Tickets</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% bookings.slice(0, 8).forEach(booking => { %>
+              <tr>
+                <td><%= booking.user ? booking.user.name : 'Unknown' %></td>
+                <td><%= booking.event ? booking.event.title : 'Deleted event' %></td>
+                <td><%= booking.quantity %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</section>

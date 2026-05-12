@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title ? `${title} | Advanced Events` : 'Advanced Events' %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/">
+        <span class="brand-mark">AE</span>
+        <span>Advanced Events</span>
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open navigation">Menu</button>
+      <div class="nav-links" data-nav-links>
+        <a href="/">Events</a>
+        <a href="/contact">Contact</a>
+        <% if (currentUser) { %>
+          <a href="/dashboard">Dashboard</a>
+          <% if (currentUser.role === 'admin') { %>
+            <a href="/admin/events">Manage Events</a>
+          <% } %>
+          <form action="/auth/logout" method="POST" class="inline-form">
+            <button class="link-button" type="submit">Logout</button>
+          </form>
+        <% } else { %>
+          <a class="button small" href="/auth">Login</a>
+        <% } %>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <% if (success) { %>
+      <div class="container flash success"><%= success %></div>
+    <% } %>
+    <% if (error) { %>
+      <div class="container flash error"><%= error %></div>
+    <% } %>
+    <%- body %>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <p>&copy; <%= new Date().getFullYear() %> Advanced Events (Pty) Ltd</p>
+      <p>Secure event management, bookings, analytics and enquiries.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

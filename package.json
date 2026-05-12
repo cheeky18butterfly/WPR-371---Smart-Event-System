@@ -1,0 +1,32 @@
+{
+  "name": "wpr-371---smart-event-system",
+  "version": "1.0.0",
+  "description": "SMART EVENT MANAGEMENT &amp; TICKETING PLATFORM",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheeky18butterfly/WPR-371---Smart-Event-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cheeky18butterfly/WPR-371---Smart-Event-System/issues"
+  },
+  "homepage": "https://github.com/cheeky18butterfly/WPR-371---Smart-Event-System#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

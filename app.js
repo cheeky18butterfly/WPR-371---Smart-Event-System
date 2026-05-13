@@ -71,6 +71,17 @@ app.get('/admin/enquiries', (req, res) => {
     res.render('pages/enquiries', { enquiries });
 });
 
+//Delete enquiry
+app.get('/admin/delete-enquiry/:index', (req, res) => {
+
+    const index = req.params.index;
+
+    enquiries.splice(index, 1);
+
+    res.redirect('/admin/enquiries');
+
+});
+
 // ADD EVENT
 app.post('/admin/add-event', (req, res) => {
 

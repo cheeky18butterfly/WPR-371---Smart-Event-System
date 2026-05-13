@@ -4,19 +4,22 @@
 
 <div class="enquiry-list">
 
-    <% enquiries.forEach(e => { %>
+    <% enquiries.forEach((e, index) => { %>
 
-        <div class="enquiry-card">
+    <div class="enquiry-card">
 
-            <h3><%= e.name %></h3>
-            <p><%= e.email %></p>
-            <p><%= e.message %></p>
-            <small><%= e.date %></small>
+        <h3><%= e.name %></h3>
+        <p><%= e.email %></p>
+        <p><%= e.message %></p>
+        <small><%= e.date %></small>
 
-        </div>
+        <a href="/admin/delete-enquiry/<%= index %>" class="delete-btn">
+            Delete
+        </a>
 
-    <% }) %>
+    </div>
 
+<% }) %>
 </div>
 
 <%- include('../partials/footer') %>

@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* NAVBAR */
+nav {
+    background-color: #ff7a00;
+    padding: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+/* PAGE CONTAINER */
+.container {
+    padding: 20px;
+}
+
+/* HEADINGS */
+h1 {
+    color: #ff7a00;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    margin-top: 40px;
+}
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.event-card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+
+.event-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-image {
+    width: 100%;
+    height: 120px;
+    background: #ff7a00;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.event-card h3 {
+    margin: 10px 0 5px;
+}
+
+.event-card button {
+    background: #ff7a00;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.event-card button:hover {
+    background: #e66a00;
+}
+
+.btn-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #ff7a00;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.btn-link:hover {
+    background: #e66a00;
+}
+
+.search-box {
+    width: calc(100% - 40px);
+    padding: 12px;
+    margin: 15px 20px;
+    border: 2px solid #ff7a00;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.search-box:focus {
+    border-color: #e66a00;
+}
+
+.event-details-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.event-banner {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #ff7a00, #ffb347);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.event-title {
+    color: #ff7a00;
+    margin-bottom: 10px;
+}
+
+.event-info {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.event-description {
+    margin-bottom: 20px;
+}
+
+.book-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff7a00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.book-btn:hover {
+    background: #e66a00;
+}

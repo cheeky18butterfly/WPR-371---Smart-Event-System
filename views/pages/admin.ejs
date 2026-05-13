@@ -4,23 +4,95 @@
 
 <div class="admin-container">
 
+    <!-- CREATE / EDIT EVENT CARD -->
     <div class="admin-card">
-        <h3>Create Event</h3>
 
-        <form action="/admin/add-event" method="POST">
+        <h3>
+            <%= eventToEdit ? 'Edit Event' : 'Create Event' %>
+        </h3>
 
-            <input type="text" name="name" placeholder="Event Name">
-            <input type="text" name="location" placeholder="Location">
-            <input type="text" name="date" placeholder="Date">
+        <form
+            action="<%= eventToEdit ? '/admin/update-event/' + eventToEdit.slug : '/admin/add-event' %>"
+            method="POST"
+        >
 
-            <button type="submit">Add Event</button>
+            <input
+                type="text"
+                name="name"
+                placeholder="Event Name"
+                value="<%= eventToEdit ? eventToEdit.name : '' %>"
+            >
+
+            <input
+                type="text"
+                name="location"
+                placeholder="Location"
+                value="<%= eventToEdit ? eventToEdit.location : '' %>"
+            >
+
+            <input
+                type="text"
+                name="date"
+                placeholder="Date"
+                value="<%= eventToEdit ? eventToEdit.date : '' %>"
+            >
+
+            <button type="submit">
+                <%= eventToEdit ? 'Update Event' : 'Add Event' %>
+            </button>
 
         </form>
+
     </div>
 
+    <!-- MANAGE EVENTS CARD -->
     <div class="admin-card">
+
         <h3>Manage Events</h3>
-        <p>Event list will appear here (future backend step)</p>
+
+        <div class="manage-events-list">
+
+            <% events.forEach(event => { %>
+
+                <div class="manage-event">
+
+                    <div>
+
+                        <strong>
+                            <%= event.name %>
+                        </strong>
+
+                        <p>
+                            <%= event.location %><br>
+                            <%= event.date %>
+                        </p>
+
+                    </div>
+
+                    <div class="manage-buttons">
+
+                        <a
+                            href="/admin/edit-event/<%= event.slug %>"
+                            class="edit-btn"
+                        >
+                            Edit
+                        </a>
+
+                        <a
+                            href="/admin/delete-event/<%= event.slug %>"
+                            class="delete-btn"
+                        >
+                            Delete
+                        </a>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
     </div>
 
 </div>

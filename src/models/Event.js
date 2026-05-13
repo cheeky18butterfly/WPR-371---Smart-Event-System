@@ -15,12 +15,22 @@ const eventSchema = new mongoose.Schema(
     category: {
       type: String,
       required: [true, 'Category is required'],
-      enum: ['Conference', 'Workshop', 'Festival', 'Private Event', 'Networking', 'Other']
+      enum: [
+        'Conference',
+        'Workshop',
+        'Festival',
+        'Private Event',
+        'Networking',
+        'Meetup',
+        'Concert',
+        'Other'
+      ]
     },
     venue: {
       type: String,
       required: [true, 'Venue is required'],
-      trim: true
+      trim: true,
+      alias: 'location'
     },
     date: {
       type: Date,
@@ -39,7 +49,8 @@ const eventSchema = new mongoose.Schema(
     ticketsBooked: {
       type: Number,
       default: 0,
-      min: 0
+      min: 0,
+      alias: 'bookedSeats'
     },
     imageUrl: {
       type: String,
@@ -47,7 +58,13 @@ const eventSchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      required: true
+    },
+    status: {
+      type: String,
+      enum: ['upcoming', 'ongoing', 'past', 'cancelled'],
+      default: 'upcoming'
     }
   },
   { timestamps: true }

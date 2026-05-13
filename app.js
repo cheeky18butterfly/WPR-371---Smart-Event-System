@@ -1,188 +1,68 @@
+require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
+const flash = require('connect-flash');
+const methodOverride = require('method-override');
 const path = require('path');
+const connectDB = require('./config/db');
 
 const app = express();
 
+// Connect to MongoDB
+connectDB();
 
-// TEMP DUMMY DATA replace with data from database in future
-let events = [
-    //{name: "Music Festival",location: "Johannesburg",date: "June 2026",slug: "music-festival"},
-    //{name: "Tech Conference",location: "Cape Town",date: "July 2026",slug: "tech-conference"}
-];
+// View engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-let enquiries = [];
-
-
-// ENABLE STATIC FILES
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// FORM DATA MIDDLEWARE
-app.use(express.urlencoded({ extended: true }));
+// Session
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
+}));
 
+// Flash messages
+app.use(flash());
 
-// SET EJS AS VIEW ENGINE
-app.set('view engine', 'ejs');
-
-
-// HOME PAGE
-app.get('/', (req, res) => {
-    res.render('pages/index');
+// Global template variables
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.user || null;
+  next();
 });
 
-// CONTACT PAGE
-app.get('/contact', (req, res) => {
-    res.render('pages/contact');
+// Routes
+app.use('/', require('./routes/eventRoutes'));
+app.use('/auth', require('./routes/authRoutes'));
+app.use('/', require('./routes/bookingRoutes'));
+app.use('/', require('./routes/enquiryRoutes'));
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).render('404', {
+    title: 'Page Not Found',
+    user: req.session.user || null
+  });
 });
 
-// EVENTS PAGE
-app.get('/events', (req, res) => {
-    res.render('pages/events', { events });
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).render('error', {
+    title: 'Server Error',
+    message: err.message,
+    user: req.session.user || null
+  });
 });
 
-//DASHBOARD PAGE
-app.get('/dashboard', (req, res) => {
-    res.render('pages/dashboard', { events });
-});
-
-// EVENT DETAILS PAGE
-app.get('/event/:name', (req, res) => {
-
-    const eventName = req.params.name;
-
-    res.render('pages/event-details', {
-        eventName
-    });
-
-});
-
-
-// ADMIN DASHBOARD
-app.get('/admin', (req, res) => {
-
-    res.render('pages/admin', {
-        events,
-        eventToEdit: null
-    });
-
-});
-
-//Admin enquiries view
-app.get('/admin/enquiries', (req, res) => {
-    res.render('pages/enquiries', { enquiries });
-});
-
-//Delete enquiry
-app.get('/admin/delete-enquiry/:index', (req, res) => {
-
-    const index = req.params.index;
-
-    enquiries.splice(index, 1);
-
-    res.redirect('/admin/enquiries');
-
-});
-
-// ADD EVENT
-app.post('/admin/add-event', (req, res) => {
-
-    const { name, location, date } = req.body;
-
-    const newEvent = {
-        name,
-        location,
-        date,
-        slug: name.toLowerCase().replace(/\s+/g, '-')
-    };
-
-    events.push(newEvent);
-
-    res.redirect('/admin');
-
-});
-
-
-// DELETE EVENT
-app.get('/admin/delete-event/:slug', (req, res) => {
-
-    const slug = req.params.slug;
-
-    events = events.filter(
-        event => event.slug !== slug
-    );
-
-    res.redirect('/admin');
-
-});
-
-
-// EDIT EVENT PAGE
-app.get('/admin/edit-event/:slug', (req, res) => {
-
-    const slug = req.params.slug;
-
-    const eventToEdit = events.find(
-        event => event.slug === slug
-    );
-
-    res.render('pages/admin', {
-        events,
-        eventToEdit
-    });
-
-});
-
-
-// UPDATE EVENT
-app.post('/admin/update-event/:slug', (req, res) => {
-
-    const slug = req.params.slug;
-
-    const event = events.find(
-        event => event.slug === slug
-    );
-
-    if (event) {
-
-        if (req.body.name.trim() !== '') {
-            event.name = req.body.name;
-        }
-
-        if (req.body.location.trim() !== '') {
-            event.location = req.body.location;
-        }
-
-        if (req.body.date.trim() !== '') {
-            event.date = req.body.date;
-        }
-
-        event.slug = event.name
-            .toLowerCase()
-            .replace(/\s+/g, '-');
-    }
-
-    res.redirect('/admin');
-
-});
-
-//Add enquiry
-app.post('/contact', (req, res) => {
-
-    const { name, email, message } = req.body;
-
-    const newEnquiry = {
-        name,
-        email,
-        message,
-        date: new Date().toLocaleString()
-    };
-
-    enquiries.push(newEnquiry);
-
-    res.redirect('/contact');
-
-});
-
-// START SERVER
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(` Server running on http://localhost:${PORT}`);
 });

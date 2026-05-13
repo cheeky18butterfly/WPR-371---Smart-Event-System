@@ -42,7 +42,7 @@
               <div class="enquiry-actions">
                 <form action="/contact/<%= enquiry._id %>/status?_method=PATCH" method="POST">
                   <select name="status">
-                    <option value="new" <%= enquiry.status === 'new' ? 'selected' : '' %>>New</option>
+                    <option value="open" <%= enquiry.status === 'open' ? 'selected' : '' %>>Open</option>
                     <option value="in progress" <%= enquiry.status === 'in progress' ? 'selected' : '' %>>In progress</option>
                     <option value="closed" <%= enquiry.status === 'closed' ? 'selected' : '' %>>Closed</option>
                   </select>

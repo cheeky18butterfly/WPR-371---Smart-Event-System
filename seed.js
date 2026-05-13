@@ -106,7 +106,7 @@ async function seed() {
     email: 'lerato@example.com',
     subject: 'Group booking request',
     message: 'Please send information about discounted tickets for teams of 20 people.',
-    status: 'new'
+    status: 'open'
   });
 
   console.log('Seed complete');

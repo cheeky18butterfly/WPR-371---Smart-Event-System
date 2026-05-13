@@ -1,0 +1,28 @@
+<%- include('../partials/navbar') %>
+
+<h1>Admin Dashboard</h1>
+
+<div class="admin-container">
+
+    <div class="admin-card">
+        <h3>Create Event</h3>
+
+        <form action="/admin/add-event" method="POST">
+
+            <input type="text" name="name" placeholder="Event Name">
+            <input type="text" name="location" placeholder="Location">
+            <input type="text" name="date" placeholder="Date">
+
+            <button type="submit">Add Event</button>
+
+        </form>
+    </div>
+
+    <div class="admin-card">
+        <h3>Manage Events</h3>
+        <p>Event list will appear here (future backend step)</p>
+    </div>
+
+</div>
+
+<%- include('../partials/footer') %>

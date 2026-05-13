@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 async function connectDB() {
   mongoose.set('strictQuery', true);
-  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/smart_event_ticketing';
+  const uri = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/wpr371_events';
   await mongoose.connect(uri);
   console.log('MongoDB connected');
 }

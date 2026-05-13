@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 connectDB()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Smart Event Management platform running at http://localhost:${PORT}`);
+      console.log(`WPR371 backend listening at http://localhost:${PORT}`);
     });
   })
   .catch((error) => {

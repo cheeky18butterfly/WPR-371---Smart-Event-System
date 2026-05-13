@@ -1,85 +1,38 @@
-# Smart Event Management & Ticketing Platform
+# WPR-371---Smart-Event-System
+SMART EVENT MANAGEMENT &amp; TICKETING PLATFORM
 
-A full-stack MVC web application for Advanced Events (Pty) Ltd, built with Node.js, Express, EJS, MongoDB and Mongoose.
+## Project Overview 
+This project requires you to design and implement a full‑stack web application using Node.js, Express, EJS, and MongoDB. The system must simulate a real‑world event booking platform with secure authentication, event management and ticket booking functionality.
 
-## Features
+###  Recommended roles include: 
+- Team Lead / Project Coordinator
+- Backend Developer
+- Frontend Developer
+- Database Engineer
+- Security / DevOps Engineer
 
-- User registration and login with bcrypt password hashing
-- Role-based access control for admin and standard users
-- Admin event CRUD with capacity management
-- Event listing, details, search and filtering
-- Ticket booking with automated capacity validation
-- User booking history and cancellation
-- Admin analytics dashboard for bookings, revenue, popular events and capacity usage
-- Contact form with database-backed admin enquiry management
-- MVC architecture with authentication, authorization and error middleware
+#### Functional Requirements 
+1. User Authentication: Registration, login, hashed passwords, role-based access 
+2. Event Management: Create, read, update, and delete events (admin only) 
+3. Ticket Booking System: Automated capacity control and booking validation 
+4. Dashboards: Admin analytics and user booking history 
+5. Contact Management System: Store and retrieve user enquiries 
+6. Search and Filtering: Event discovery features
 
-## Project Structure
+#### Technical Requirements 
+The system must follow the MVC architecture with a clear separation of concerns. 
+Authentication and authorization must be implemented using middleware. MongoDB with 
+Mongoose must be used for data persistence. GitHub must be used for version control with meaningful commits and collaboration evidence. 
 
-```text
-src/
-  config/          MongoDB connection
-  controllers/     Request handlers
-  middleware/      Auth, role checks and error handling
-  models/          Mongoose schemas
-  routes/          Express route definitions
-  views/           EJS pages and layouts
-public/
-  css/             Styling
-  js/              Browser JavaScript
-  images/          Static image assets
-```
+### Mandatory Web Pages - Portal Structure
+1. Home / Event Listing Page 
+2. User Authentication Page
+3. Event Management Page (Admin Only)
+4. Booking & Dashboard Page
+5. Contact / Enquiry Management Page
 
-## Setup
-
-1. Install dependencies:
-
-```bash
-npm install
-```
-
-2. Create your environment file:
-
-```bash
-copy .env.example .env
-```
-
-3. Make sure MongoDB is running locally, or replace `MONGODB_URI` in `.env` with a MongoDB Atlas connection string.
-
-4. Seed sample users and events:
-
-```bash
-npm run seed
-```
-
-5. Start the app:
-
-```bash
-npm run dev
-```
-
-Open `http://localhost:3000`.
-
-## Demo Accounts
-
-Admin:
-
-- Email: `admin@advancedevents.local`
-- Password: `Admin123!`
-
-Standard user:
-
-- Email: `user@advancedevents.local`
-- Password: `User123!`
-
-## Admin Registration
-
-Users register as standard users by default. To register a new admin through the UI, set `ADMIN_REGISTRATION_CODE` in `.env` and enter the same code during registration.
-
-## Mandatory Pages Covered
-
-- Home / Event Listing Page: `/`
-- User Authentication Page: `/auth`
-- Event Management Page: `/admin/events`
-- Booking & Dashboard Page: `/dashboard`
-- Contact / Enquiry Management Page: `/contact`
+## NOTE: All five pages must be:
+- Secure and role-aware
+- Integrated with MongoDB via Mongoose
+- Styled for usability and basic responsiveness
+- Demonstrated during final presentation and evaluation 

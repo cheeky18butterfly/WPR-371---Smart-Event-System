@@ -1,22 +1,16 @@
 {
-  "name": "smart-event-ticketing-platform",
-  "version": "1.0.0",
-  "description": "Smart Event Management and Ticketing Platform built with Node.js, Express, EJS, MongoDB and Mongoose.",
+  "name": "wpr371-event-ticketing-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WPR371 group project Express/Mongoose backend.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js",
-    "seed": "node seed.js"
+    "dev": "nodemon server.js"
   },
-  "keywords": [
-    "events",
-    "ticketing",
-    "express",
-    "ejs",
-    "mongodb",
-    "mongoose"
-  ],
-  "author": "Advanced Events Development Team",
+  "engines": {
+    "node": ">=18"
+  },
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -31,5 +25,18 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
+  "name": "wpr-371---smart-event-system",
+  "version": "1.0.0",
+  "description": "SMART EVENT MANAGEMENT &amp; TICKETING PLATFORM",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1"
   }
 }

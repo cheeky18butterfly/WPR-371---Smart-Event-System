@@ -13,11 +13,7 @@ async function listEvents(req, res, next) {
 
     if (q) {
       const search = new RegExp(escapeRegex(q), 'i');
-      filter.$or = [
-        { title: search },
-        { description: search },
-        { venue: search }
-      ];
+      filter.$or = [{ title: search }, { description: search }, { venue: search }];
     }
 
     if (category) filter.category = category;

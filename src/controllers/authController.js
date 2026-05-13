@@ -52,7 +52,7 @@ async function login(req, res, next) {
 function logout(req, res, next) {
   req.session.destroy((error) => {
     if (error) return next(error);
-    res.clearCookie('advanced_events_sid');
+    res.clearCookie('wpr371_sid');
     return res.redirect('/');
   });
 }

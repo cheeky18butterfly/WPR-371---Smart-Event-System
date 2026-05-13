@@ -25,8 +25,8 @@ const enquirySchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['new', 'in progress', 'closed'],
-      default: 'new'
+      enum: ['open', 'in progress', 'closed'],
+      default: 'open'
     },
     submittedBy: {
       type: mongoose.Schema.Types.ObjectId,

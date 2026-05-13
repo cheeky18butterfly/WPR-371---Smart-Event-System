@@ -4,11 +4,13 @@ const path = require('path');
 const app = express();
 
 
-// TEMP DUMMY DATA
+// TEMP DUMMY DATA replace with data from database in future
 let events = [
     //{name: "Music Festival",location: "Johannesburg",date: "June 2026",slug: "music-festival"},
     //{name: "Tech Conference",location: "Cape Town",date: "July 2026",slug: "tech-conference"}
 ];
+
+let enquiries = [];
 
 
 // ENABLE STATIC FILES
@@ -27,12 +29,20 @@ app.get('/', (req, res) => {
     res.render('pages/index');
 });
 
+// CONTACT PAGE
+app.get('/contact', (req, res) => {
+    res.render('pages/contact');
+});
 
 // EVENTS PAGE
 app.get('/events', (req, res) => {
     res.render('pages/events', { events });
 });
 
+//DASHBOARD PAGE
+app.get('/dashboard', (req, res) => {
+    res.render('pages/dashboard', { events });
+});
 
 // EVENT DETAILS PAGE
 app.get('/event/:name', (req, res) => {
@@ -56,6 +66,10 @@ app.get('/admin', (req, res) => {
 
 });
 
+//Admin enquiries view
+app.get('/admin/enquiries', (req, res) => {
+    res.render('pages/enquiries', { enquiries });
+});
 
 // ADD EVENT
 app.post('/admin/add-event', (req, res) => {
@@ -139,6 +153,23 @@ app.post('/admin/update-event/:slug', (req, res) => {
 
 });
 
+//Add enquiry
+app.post('/contact', (req, res) => {
+
+    const { name, email, message } = req.body;
+
+    const newEnquiry = {
+        name,
+        email,
+        message,
+        date: new Date().toLocaleString()
+    };
+
+    enquiries.push(newEnquiry);
+
+    res.redirect('/contact');
+
+});
 
 // START SERVER
 app.listen(3000, () => {
